@@ -1,0 +1,102 @@
+[
+  {
+    "Id": 1,
+    "name": "Wireless Bluetooth Headphones",
+    "price": 89.99,
+    "stock": 25,
+    "category": "Electronics",
+    "description": "Premium wireless headphones with noise cancellation and 30-hour battery life.",
+    "lowStockThreshold": 10,
+    "createdAt": "2024-01-15T10:30:00Z"
+  },
+  {
+    "Id": 2,
+    "name": "Ergonomic Office Chair",
+    "price": 299.99,
+    "stock": 8,
+    "category": "Furniture",
+    "description": "Comfortable ergonomic chair with lumbar support and adjustable height.",
+    "lowStockThreshold": 5,
+    "createdAt": "2024-01-16T14:20:00Z"
+  },
+  {
+    "Id": 3,
+    "name": "Stainless Steel Water Bottle",
+    "price": 24.99,
+    "stock": 45,
+    "category": "Home & Garden",
+    "description": "Insulated stainless steel water bottle that keeps drinks cold for 24 hours.",
+    "lowStockThreshold": 15,
+    "createdAt": "2024-01-17T09:15:00Z"
+  },
+  {
+    "Id": 4,
+    "name": "Smartphone Case",
+    "price": 19.99,
+    "stock": 3,
+    "category": "Electronics",
+    "description": "Protective case with shock absorption and wireless charging compatibility.",
+    "lowStockThreshold": 10,
+    "createdAt": "2024-01-18T11:45:00Z"
+  },
+  {
+    "Id": 5,
+    "name": "LED Desk Lamp",
+    "price": 49.99,
+    "stock": 0,
+    "category": "Home & Garden",
+    "description": "Adjustable LED desk lamp with touch controls and USB charging port.",
+    "lowStockThreshold": 8,
+    "createdAt": "2024-01-19T16:30:00Z"
+  },
+  {
+    "Id": 6,
+    "name": "Yoga Mat",
+    "price": 35.99,
+    "stock": 18,
+    "category": "Fitness",
+    "description": "Non-slip yoga mat made from eco-friendly materials with alignment guides.",
+    "lowStockThreshold": 10,
+    "createdAt": "2024-01-20T08:00:00Z"
+  },
+  {
+    "Id": 7,
+    "name": "Coffee Maker",
+    "price": 129.99,
+    "stock": 12,
+    "category": "Kitchen",
+    "description": "Programmable coffee maker with thermal carafe and auto-brew feature.",
+    "lowStockThreshold": 6,
+    "createdAt": "2024-01-21T13:20:00Z"
+  },
+  {
+    "Id": 8,
+    "name": "Running Shoes",
+    "price": 119.99,
+    "stock": 5,
+    "category": "Fitness",
+    "description": "Lightweight running shoes with breathable mesh and cushioned sole.",
+    "lowStockThreshold": 8,
+    "createdAt": "2024-01-22T10:10:00Z"
+  },
+  {
+    "Id": 9,
+    "name": "Wireless Mouse",
+    "price": 39.99,
+    "stock": 32,
+    "category": "Electronics",
+    "description": "Ergonomic wireless mouse with precision tracking and long battery life.",
+    "lowStockThreshold": 15,
+    "createdAt": "2024-01-23T15:45:00Z"
+  },
+  {
+    "Id": 10,
+    "name": "Plant Pot Set",
+    "price": 27.99,
+    "stock": 22,
+    "category": "Home & Garden",
+    "description": "Set of 3 ceramic plant pots with drainage holes and matching saucers.",
+    "lowStockThreshold": 12,
+    "createdAt": "2024-01-24T12:00:00Z"
+  }
+]
