@@ -19,7 +19,7 @@ const Orders = () => {
   const [statusFilter, setStatusFilter] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
 
-  const loadOrders = async () => {
+const loadOrders = async () => {
     try {
       setLoading(true);
       setError("");
@@ -46,9 +46,9 @@ const Orders = () => {
     }
 
     if (searchTerm) {
-      filtered = filtered.filter(order => 
-        order.customerInfo.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        order.customerInfo.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+filtered = filtered.filter(order => 
+        order.customerInfo?.name?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        order.customerInfo?.email?.toLowerCase().includes(searchTerm.toLowerCase()) ||
         order.Id.toString().includes(searchTerm)
       );
     }
@@ -56,10 +56,17 @@ const Orders = () => {
     setFilteredOrders(filtered);
   }, [statusFilter, searchTerm, orders]);
 
-  const updateOrderStatus = async (orderId, newStatus) => {
+const updateOrderStatus = async (orderId, newStatus) => {
     try {
       const order = orders.find(o => o.Id === orderId);
-      await orderService.update(orderId, { ...order, status: newStatus });
+      const updatedOrderData = {
+        items: order.items,
+        total: order.total,
+        status: newStatus,
+        customerInfo: order.customerInfo,
+        createdAt: order.createdAt
+      };
+      await orderService.update(orderId, updatedOrderData);
       toast.success("Order status updated successfully!");
       loadOrders();
     } catch (error) {
@@ -202,20 +209,20 @@ const Orders = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <h4 className="font-semibold text-secondary-900 mb-1">Customer</h4>
-                        <p className="text-secondary-700">{order.customerInfo.name}</p>
-                        <p className="text-secondary-600 text-sm">{order.customerInfo.email}</p>
-                        <p className="text-secondary-600 text-sm">{order.customerInfo.phone}</p>
+<p className="text-secondary-700">{order.customerInfo?.name || 'Unknown Customer'}</p>
+                        <p className="text-secondary-600 text-sm">{order.customerInfo?.email || 'No email'}</p>
+                        <p className="text-secondary-600 text-sm">{order.customerInfo?.phone || 'No phone'}</p>
                       </div>
                       <div>
                         <h4 className="font-semibold text-secondary-900 mb-1">Delivery Address</h4>
-                        <p className="text-secondary-600 text-sm">{order.customerInfo.address}</p>
+<p className="text-secondary-600 text-sm">{order.customerInfo?.address || 'No address'}</p>
                       </div>
                     </div>
 
                     <div>
                       <h4 className="font-semibold text-secondary-900 mb-2">Order Items</h4>
                       <div className="space-y-1">
-                        {order.items.map((item, index) => (
+{order.items?.map((item, index) => (
                           <div key={index} className="flex justify-between items-center text-sm bg-secondary-50 p-2 rounded">
                             <span>{item.productName} × {item.quantity}</span>
                             <span className="font-medium">{formatPrice(item.total)}</span>

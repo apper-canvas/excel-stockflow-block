@@ -41,7 +41,7 @@ const ShoppingCart = () => {
     setIsProcessing(true);
 
     try {
-      const orderData = {
+const orderData = {
         items: items.map(item => ({
           productId: item.productId,
           productName: item.name,

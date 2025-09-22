@@ -32,7 +32,7 @@ const ProductList = ({ view = "admin" }) => {
     lowStockThreshold: ""
   });
 
-  const loadProducts = async () => {
+const loadProducts = async () => {
     try {
       setLoading(true);
       setError("");
@@ -70,7 +70,7 @@ const ProductList = ({ view = "admin" }) => {
 
   const categories = [...new Set(products.map(p => p.category))];
 
-  const handleEdit = (product) => {
+const handleEdit = (product) => {
     setSelectedProduct(product);
     setFormData({
       name: product.name,
@@ -95,7 +95,7 @@ const ProductList = ({ view = "admin" }) => {
     setIsAddModalOpen(true);
   };
 
-  const handleSubmit = async (e, isEdit = false) => {
+const handleSubmit = async (e, isEdit = false) => {
     e.preventDefault();
     try {
       const productData = {
@@ -138,14 +138,23 @@ const ProductList = ({ view = "admin" }) => {
     }
   };
 
-  const handleStockAdjustment = async () => {
+const handleStockAdjustment = async () => {
     if (!stockAdjustment.quantity || !stockAdjustment.productId) return;
 
     try {
       const product = products.find(p => p.Id === stockAdjustment.productId);
       const newStock = Math.max(0, product.stock + parseInt(stockAdjustment.quantity));
       
-      await productService.update(product.Id, { ...product, stock: newStock });
+      const updatedProductData = {
+        name: product.name,
+        price: product.price,
+        stock: newStock,
+        category: product.category,
+        description: product.description,
+        lowStockThreshold: product.lowStockThreshold
+      };
+      
+      await productService.update(product.Id, updatedProductData);
       toast.success("Stock updated successfully!");
       setStockAdjustment({ productId: null, quantity: "", isOpen: false });
       loadProducts();

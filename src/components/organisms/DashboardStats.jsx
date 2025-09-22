@@ -16,7 +16,7 @@ const DashboardStats = () => {
   const [recentOrders, setRecentOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const loadDashboardData = async () => {
+const loadDashboardData = async () => {
     try {
       setLoading(true);
       const [products, orders] = await Promise.all([
@@ -166,7 +166,7 @@ const DashboardStats = () => {
               </div>
             ) : (
               <div className="space-y-3">
-                {lowStockProducts.slice(0, 5).map((product) => (
+{lowStockProducts.slice(0, 5).map((product) => (
                   <div key={product.Id} className="flex items-center justify-between p-3 bg-gradient-to-r from-warning-50 to-warning-100 rounded-lg border border-warning-200">
                     <div>
                       <h4 className="font-medium text-secondary-900">{product.name}</h4>
@@ -213,17 +213,17 @@ const DashboardStats = () => {
               </div>
             ) : (
               <div className="space-y-3">
-                {recentOrders.map((order) => (
+{recentOrders.map((order) => (
                   <div key={order.Id} className="flex items-center justify-between p-3 bg-gradient-to-r from-secondary-50 to-primary-50 rounded-lg border border-secondary-200">
                     <div>
                       <h4 className="font-medium text-secondary-900">Order #{order.Id}</h4>
-                      <p className="text-sm text-secondary-600">{order.customerInfo.name}</p>
+                      <p className="text-sm text-secondary-600">{order.customerInfo?.name || 'Unknown Customer'}</p>
                       <p className="text-xs text-secondary-500">{formatDate(order.createdAt)}</p>
                     </div>
                     <div className="text-right">
                       <p className="font-bold text-success-600">{formatPrice(order.total)}</p>
                       <Badge variant="info" size="sm">
-                        {order.items.length} items
+                        {order.items?.length || 0} items
                       </Badge>
                     </div>
                   </div>

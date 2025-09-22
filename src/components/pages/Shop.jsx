@@ -27,7 +27,7 @@ const Shop = () => {
     try {
       setLoading(true);
       setError("");
-      const data = await productService.getAll();
+const data = await productService.getAll();
       // Only show products that are in stock for customers
       const availableProducts = data.filter(product => product.stock > 0);
       setProducts(availableProducts);

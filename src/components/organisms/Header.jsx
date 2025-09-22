@@ -1,14 +1,18 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 import Button from "@/components/atoms/Button";
 import Badge from "@/components/atoms/Badge";
 import ApperIcon from "@/components/ApperIcon";
 import { useCart } from "@/hooks/useCart";
+import { AuthContext } from "@/App";
 
 const Header = ({ currentView, onViewChange }) => {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { items } = useCart();
+  const { logout } = useContext(AuthContext);
+  const { user } = useSelector((state) => state.user);
   
   const cartItemCount = items.reduce((sum, item) => sum + item.quantity, 0);
 
@@ -27,6 +31,10 @@ const Header = ({ currentView, onViewChange }) => {
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  const handleLogout = async () => {
+    await logout();
   };
 
   return (
@@ -74,8 +82,16 @@ const Header = ({ currentView, onViewChange }) => {
             })}
           </nav>
 
-          {/* View Toggle & Mobile Menu Button */}
+          {/* View Toggle, User Info & Mobile Menu Button */}
           <div className="flex items-center space-x-3">
+            {user && (
+              <div className="hidden sm:flex items-center space-x-3">
+                <span className="text-sm text-secondary-600">
+                  Welcome, {user.firstName || user.name || 'User'}
+                </span>
+              </div>
+            )}
+            
             <Button
               variant="outline"
               size="sm"
@@ -87,6 +103,16 @@ const Header = ({ currentView, onViewChange }) => {
                 className="h-4 w-4 mr-2" 
               />
               {currentView === "admin" ? "Shop View" : "Admin View"}
+            </Button>
+
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={handleLogout}
+              className="hidden sm:flex"
+            >
+              <ApperIcon name="LogOut" className="h-4 w-4 mr-2" />
+              Logout
             </Button>
 
             {/* Mobile menu button */}
@@ -127,7 +153,7 @@ const Header = ({ currentView, onViewChange }) => {
                 </Link>
               );
             })}
-            <div className="pt-3 border-t border-secondary-200">
+            <div className="pt-3 border-t border-secondary-200 space-y-2">
               <Button
                 variant="outline"
                 size="sm"
@@ -142,6 +168,18 @@ const Header = ({ currentView, onViewChange }) => {
                   className="h-4 w-4 mr-2" 
                 />
                 Switch to {currentView === "admin" ? "Shop View" : "Admin View"}
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => {
+                  handleLogout();
+                  setMobileMenuOpen(false);
+                }}
+                className="w-full justify-center"
+              >
+                <ApperIcon name="LogOut" className="h-4 w-4 mr-2" />
+                Logout
               </Button>
             </div>
           </div>
